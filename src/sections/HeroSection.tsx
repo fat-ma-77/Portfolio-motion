@@ -2,7 +2,7 @@ import ContactButton from '../components/ContactButton'
 import FadeIn from '../components/FadeIn'
 import Magnet from '../components/Magnet'
 import Tilt3D from '../components/Tilt3D'
-import { hero, navLinks, site } from '../data/content'
+import { asset, hero, navLinks, site } from '../data/content'
 
 export default function HeroSection() {
   return (
@@ -72,7 +72,7 @@ export default function HeroSection() {
             </div>
 
             <img
-              src="/assets/images/rotate-img.png"
+              src={asset('assets/images/rotate-img.png')}
               alt=""
               aria-hidden="true"
               className="pointer-events-none absolute -right-6 top-8 w-24 animate-spin-slow sm:-right-8 sm:top-10 sm:w-28 md:-right-10 md:w-32"

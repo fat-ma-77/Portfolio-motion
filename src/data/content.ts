@@ -1,8 +1,12 @@
+/** Prefix local public assets so they work on GitHub Pages (/portfolio3D/). */
+export const asset = (path: string) =>
+  `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+
 export const site = {
   title: 'Fatima -- Web Developer',
   name: 'Fatima Abdurrahman',
   brand: 'THAT TECH LADY',
-  portrait: '/assets/images/DSC02325.jpg',
+  portrait: asset('assets/images/DSC02325.jpg'),
   socials: {
     facebook: 'https://www.facebook.com/profile.php?id=61555144797133',
     linkedin: 'https://www.linkedin.com/in/sor-institute-7a476a347/',
@@ -106,19 +110,19 @@ export const skillCategories = [
 ]
 
 export const marqueeImages = [
-  '/assets/images/bu.png',
-  '/assets/images/brarug.png',
-  '/assets/images/sor.png',
-  '/assets/images/benadir-university.png',
-  '/assets/images/almas.png',
-  '/assets/images/profile.jpg',
-  '/assets/images/DSC00302.jpg',
-  '/assets/images/DSC00313.jpg',
-  '/assets/images/portfolio-1.jpg',
-  '/assets/images/portfolio-2.jpg',
-  '/assets/images/portfolio-3.jpg',
-  '/assets/images/portfolio-4.jpg',
-  '/assets/images/about-banner.jpg',
-  '/assets/images/hero-banner.jpg',
-  '/assets/images/br.png',
+  asset('assets/images/bu.png'),
+  asset('assets/images/brarug.png'),
+  asset('assets/images/sor.png'),
+  asset('assets/images/benadir-university.png'),
+  asset('assets/images/almas.png'),
+  asset('assets/images/profile.jpg'),
+  asset('assets/images/DSC00302.jpg'),
+  asset('assets/images/DSC00313.jpg'),
+  asset('assets/images/portfolio-1.jpg'),
+  asset('assets/images/portfolio-2.jpg'),
+  asset('assets/images/portfolio-3.jpg'),
+  asset('assets/images/portfolio-4.jpg'),
+  asset('assets/images/about-banner.jpg'),
+  asset('assets/images/hero-banner.jpg'),
+  asset('assets/images/br.png'),
 ]
