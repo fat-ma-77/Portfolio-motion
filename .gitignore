@@ -48,5 +48,11 @@ coverage/
 tmp/
 temp/
 
-# Private documents
-public/assets/images/Fatima-CV-updated*.pdf
+# Private documents — never publish CVs / resumes / secrets
+**/Fatima-CV*.pdf
+**/*CV*.pdf
+**/*resume*.pdf
+**/*.pem
+**/*.key
+.env*
+!.env.example

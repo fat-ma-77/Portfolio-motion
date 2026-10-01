@@ -1,17 +1,31 @@
-import AboutSection from './sections/AboutSection'
-import ContactSection from './sections/ContactSection'
-import HeroSection from './sections/HeroSection'
-import MarqueeSection from './sections/MarqueeSection'
-import SkillsSection from './sections/SkillsSection'
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { ArrowDownRight, ArrowUpRight, ArrowUp, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { asset } from './data/content'
+
+const projects = [
+  { no: '01', title: 'Benadir Innovation Hub', type: 'Innovation / Digital platform', tech: 'React · Tailwind · Node · MongoDB', image: 'assets/images/bu.png', url: 'https://ihub.bu.edu.so/' },
+  { no: '02', title: 'Baraarug Consulting Firm', type: 'Strategy / Business site', tech: 'React · TypeScript · Next.js', image: 'assets/images/brarug.png', url: 'https://bcf.so/' },
+  { no: '03', title: 'Almas Training & Consultancy', type: 'Learning / Course platform', tech: 'React · TypeScript · Next.js', image: 'assets/images/Screenshot 2025-09-08 164526.png', url: 'https://www.almasltd.com/' },
+  { no: '04', title: 'SOR Institute', type: 'Education / Community', tech: 'React · TypeScript · Next.js', image: 'assets/images/sor.png', url: 'https://www.sorinstitute.org/' },
+  { no: '05', title: 'Benadir University', type: 'Education / Institutional site', tech: 'HTML · CSS · JavaScript · jQuery', image: 'assets/images/benadir-university.png', url: 'https://bu.edu.so/' },
+]
+const skills = ['React', 'JavaScript', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB', 'MySQL', 'REST APIs', 'Python', 'Machine Learning', 'Azure AI', 'AWS AI']
 
 export default function App() {
-  return (
-    <main className="overflow-x-clip bg-[#0C0C0C]">
-      <HeroSection />
-      <MarqueeSection />
-      <AboutSection />
-      <SkillsSection />
-      <ContactSection />
-    </main>
-  )
+  const { scrollYProgress } = useScroll(); const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
+  const [cursor, setCursor] = useState({ x: 0, y: 0 })
+  useEffect(() => { const move = (e: MouseEvent) => setCursor({ x: e.clientX, y: e.clientY }); window.addEventListener('mousemove', move); return () => window.removeEventListener('mousemove', move) }, [])
+  const orbX = useTransform(progress, [0, 1], [0, 280]); const orbY = useTransform(progress, [0, 1], [0, -450])
+  return <div className="site-shell" style={{ '--cursor-x': `${cursor.x}px`, '--cursor-y': `${cursor.y}px` } as React.CSSProperties}>
+    <motion.div className="scroll-progress" style={{ scaleX: progress }} /><motion.div className="cursor-orb" style={{ x: orbX, y: orbY }} />
+    <nav className="topbar"><a className="wordmark" href="#top"><span>FATIMA</span><small>THAT TECH LADY®</small></a><div className="navlinks"><a href="#work">Selected work</a><a href="#about">About</a><a href="#contact">Contact</a></div><a className="menu-pill" href="mailto:faatum7@gmail.com">Let’s talk <ArrowUpRight size={16} /></a></nav>
+    <main id="top">
+      <section className="hero section-pad"><div className="hero-kicker"><span className="status-dot" /> Available for selected projects <span className="year">/ 2026</span></div><div className="hero-grid"><div className="hero-copy"><p className="eyebrow">Front-end developer <i>+</i> technology builder</p><h1>Ideas<br /><em>into</em><br />impact<span>.</span></h1><p className="hero-intro">I build digital products and technology initiatives that connect people with ideas, skills and opportunities.</p><a href="#work" className="circle-link"><ArrowDownRight size={24} /><span>Explore<br />my work</span></a></div><div className="hero-visual"><div className="portrait-wrap"><img src={asset('assets/images/WhatsApp Image 2026-09-30 at 3.46.07 PM.jpeg')} alt="Fatima Abdurrahman" /></div><div className="visual-tag tag-a">Mogadishu<br /><span>Somalia</span></div><div className="visual-tag tag-b">03+<span>years building</span></div><div className="stamp">SCROLL<br /><b>↓</b><br />TO EXPLORE</div></div></div><div className="hero-footer"><span>Scroll to explore</span><span className="line" /><span>01 — 05</span></div></section>
+      <section className="marquee"><div className="marquee-track">BUILD WITH PURPOSE <b>✳</b> CREATE WITH CLARITY <b>✳</b> BUILD WITH PURPOSE <b>✳</b> CREATE WITH CLARITY <b>✳</b></div></section>
+      <section className="work section-pad" id="work"><div className="section-heading"><p className="eyebrow">02 / Selected work</p><h2>Built to<br /><em>matter.</em></h2><p className="section-note">A collection of digital experiences, platforms and identities built for people doing meaningful work.</p></div><div className="project-list">{projects.map((project, i) => <motion.a key={project.no} href={project.url} target="_blank" rel="noreferrer" className="project-row" initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ delay: i * .06 }}><span className="project-no">{project.no}</span><div className="project-title"><h3>{project.title}</h3><p>{project.type}</p></div><div className="project-image"><img src={asset(project.image)} alt="" /></div><span className="project-tech">{project.tech}</span><ArrowUpRight className="project-arrow" size={25} /></motion.a>)}</div></section>
+      <section className="about section-pad" id="about"><div className="about-mark">✳</div><div className="about-content"><p className="eyebrow">03 / A little about me</p><h2>Technology should feel <em>human.</em></h2><p className="about-text">With more than three years of experience as a Full Stack Developer and UI/UX Designer based in Mogadishu, Somalia, I focus on modern web technologies, branding, and user experience. I truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!</p><div className="skill-cloud">{skills.map((skill) => <span key={skill}>{skill}</span>)}</div></div></section>
+      <section className="contact section-pad" id="contact"><div><p className="eyebrow">04 / Start a conversation</p><h2>Have a good<br /><em>idea?</em></h2></div><div className="contact-side"><p>Let’s turn the ambitious ones into something real.</p><a className="email-link" href="mailto:faatum7@gmail.com">faatum7<br />@gmail.com <ArrowUpRight /></a><div className="contact-details"><span><Phone size={14} /> +252 617 973 699</span><span><MapPin size={14} /> Hodan, Mogadishu, Somalia</span></div></div></section>
+    </main><footer className="footer"><span>© 2026 Fatima Abdurrahman</span><div><a href="https://github.com/fatima-abdurahman"><Github size={17} /></a><a href="https://www.linkedin.com/in/sor-institute-7a476a347/"><Linkedin size={17} /></a><a href="mailto:faatum7@gmail.com"><Mail size={17} /></a></div><a href="#top" className="back-top">Back to top <ArrowUp size={15} /></a></footer>
+  </div>
 }
